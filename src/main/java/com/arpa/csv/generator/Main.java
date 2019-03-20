@@ -3,6 +3,8 @@ package com.arpa.csv.generator;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
     private static final String FILE_PREFIX = "csv";
@@ -21,9 +23,14 @@ public class Main {
         long fileNumber = Long.parseLong(args[1]);
         long recordsNumber = Long.parseLong(args[2]);
 
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+
         for (long fileIndex = 0; fileIndex < fileNumber; fileIndex++) {
-            createCsvFile(path, fileIndex, recordsNumber);
+            final long stableFileIndex = fileIndex;
+            executorService.submit(() -> createCsvFile(path, stableFileIndex, recordsNumber));
         }
+
+        executorService.shutdown();
     }
 
     private static void createCsvFile(String path, long fileIndex, long recordsNumber) {
