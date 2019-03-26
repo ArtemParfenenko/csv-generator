@@ -47,10 +47,14 @@ public class Main {
     }
 
     private static String getContent() {
-        return getRand100() + SEPARATOR + getRand100() + END_LINE;
+        return getRand10000() + SEPARATOR + getRand10000() + END_LINE;
     }
 
     private static int getRand100() {
         return RANDOM.nextInt(100) + 1;
+    }
+
+    private static int getRand10000() {
+        return RANDOM.nextInt(10000) + 1;
     }
 }
