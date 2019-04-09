@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Main {
@@ -33,16 +31,17 @@ public class Main {
         long fileNumber = Long.parseLong(args[2]);
         long recordsNumber = Long.parseLong(args[3])/MAGIC_COUNT;
 
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
+//        ExecutorService executorService = Executors.newFixedThreadPool(5);
 
         for (int i = 1; i <= countDomainGroup; i++) {
             for (long fileIndex = 0; fileIndex < fileNumber; fileIndex++) {
                 final long stableFileIndex = fileIndex;
                 int currentDomainGroup = i;
-                executorService.submit(() -> createCsvFile(path, stableFileIndex, recordsNumber, currentDomainGroup));
+//                executorService.submit(() -> createCsvFile(path, stableFileIndex, recordsNumber, currentDomainGroup));
+                createCsvFile(path, stableFileIndex, recordsNumber, currentDomainGroup);
             }
         }
-        executorService.shutdown();
+//        executorService.shutdown();
     }
 
     private static void createCsvFile(String path, long fileIndex, long recordsNumber, int domainGroup) {
