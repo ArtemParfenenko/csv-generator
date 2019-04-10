@@ -47,7 +47,7 @@ public class Main {
     }
 
     private static String getContent() {
-        return getRand10000() + SEPARATOR + getRand10000() + END_LINE;
+        return getRand10000() + SEPARATOR + 1 + SEPARATOR + 1+ END_LINE;
     }
 
     private static int getRand100() {
@@ -55,6 +55,6 @@ public class Main {
     }
 
     private static int getRand10000() {
-        return RANDOM.nextInt(10000) + 1;
+        return RANDOM.nextInt(3000000) + 1;
     }
 }
